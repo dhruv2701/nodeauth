@@ -36,6 +36,18 @@ router.post('/login', async (req, res) => {
         res.status(505).send({message:err.message})
     }
 })
+router.post('/change-password', authenticateToken, async (req, res) => {
+    const { password } = req.body
+    try {
+        const hashNewPassword = await bcrypt.hash(password, 8)
+        const id = req.user.id
+        const user = await User.findByIdAndUpdate(id, { $set:{password: hashNewPassword }}, { new: true })
+        res.json({ message: 'password updated successfully', user: user })
+    }
+    catch (err) {
+        res.json({ error: err.message })
+    }
+})
 router.post('/logout', auth,  async (req, res)=>{
     try {
         const { user, token } = req

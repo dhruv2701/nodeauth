@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 const jwt    = require('jsonwebtoken')
 const Task = require('../model/task')
+const User = require('../model/user')
 require('dotenv').config();
 
 //GET all tasks of a user
