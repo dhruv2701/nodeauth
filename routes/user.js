@@ -4,18 +4,14 @@ const bcrypt = require('bcryptjs')
 const jwt    = require('jsonwebtoken')
 const User = require('../model/user')
 const auth = require('../middleware/auth')
-const sendWelcomeEmail = require('../emails/account')
 require('dotenv').config();
 
 router.post('/', async (req, res) => {
     try {
-        sendWelcomeEmail(req.body.email, req.body.username)
         const user = new User(req.body);
         await user.save();
-        
-        console.log('send email')
         const token = await user.generateAuthToken()
-        res.status(201).json({user});
+        res.status(201).json({user, token});
     }
     catch (err) {
         if (err.code == 11000)

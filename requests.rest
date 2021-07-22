@@ -1,28 +1,48 @@
-GET http://localhost:5004/api/posts
 
+GET http://localhost:5007/api/task/u
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGY5NTM1NTNjMWM0ZTMwOTAzZTBmMDIiLCJpYXQiOjE2MjY5NTY5ODZ9.5R6l4QztrZ548WMiHnwE5LAGK05mfeGGRFY2I29ejP4
 ###
-GET http://localhost:5004/api/me
-
-###
-POST http://localhost:5004/api/ HTTP/1.1
+POST http://localhost:5007/api/task/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGY5NTM1NTNjMWM0ZTMwOTAzZTBmMDIiLCJpYXQiOjE2MjY5NTUwMzV9.aW3cGJw180qiF8R5fiAEPQuMj4A3ccRkFEe0odJaYj8
 Content-Type: application/json
 
 {
-    "email": "45haiholi@gmail.com",
-    "username" : "diwaliholihaholii",
+    "description": "complete-node",
+    "isCompleted":false
+}
+###
+PATCH http://localhost:5007/api/task/:id 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGY5NTM1NTNjMWM0ZTMwOTAzZTBmMDIiLCJpYXQiOjE2MjY5NTc2NTV9.3DYw8m8qVQx6FQhoh74sLKduUJR-GTWOmWK46w5KewI
+Content-Type: application/json
+
+{
+    "description": "complete-node",
+    "isCompleted":false
+}
+###
+DELETE http://localhost:5007/api/task/:id HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGY5NTM1NTNjMWM0ZTMwOTAzZTBmMDIiLCJpYXQiOjE2MjY5NTc2NTV9.3DYw8m8qVQx6FQhoh74sLKduUJR-GTWOmWK46w5KewI
+
+###
+POST http://localhost:5007/api/user/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "jeeyodhan@gmail.com",
+    "username" : "jeeyodhan",
     "password":  "suhambbnbn"
 }
 
 ###
-POST http://localhost:5004/api/login HTTP/1.1
+POST http://localhost:5007/api/user/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "username" : "hellojargon",
+    "username" : "jeeyodhan",
     "password":  "suhambbnbn"
 }
 ###
-POST http://localhost:5004/api/change-password HTTP/1.1
+POST http://localhost:5007/api/user/change-password HTTP/1.1
 Content-Type: application/json
 
 {

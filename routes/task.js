@@ -4,12 +4,15 @@ const bcrypt = require('bcryptjs')
 const jwt    = require('jsonwebtoken')
 const Task = require('../model/task')
 const User = require('../model/user')
+const auth = require('../middleware/auth')
 require('dotenv').config();
 
 //GET all tasks of a user
 router.get('/u', auth, async (req, res) => {
     try {
-        res.send(req.user.tasks)
+        const task = await Task.find({owner:req.user._id})
+        res.json({task})
+        
     } catch (e) {
         res.status(500).send()
     }
@@ -20,10 +23,10 @@ router.post('/', auth, async (req, res) => {
         ...req.body,
         owner: req.user._id
     })
-
+    res.json({task})
     try {
         await task.save()
-        res.status(201).send(task)
+        res.status(201).json({task})
     } catch (e) {
         res.status(400).send(e)
     }
@@ -31,7 +34,7 @@ router.post('/', auth, async (req, res) => {
 // Update
 router.patch('/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['description', 'completed']
+    const allowedUpdates = ['description', 'isCompleted']
     const isValidUpdate = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidUpdate) {
@@ -39,9 +42,7 @@ router.patch('/:id', auth, async (req, res) => {
     }
 
     try {
-        const { id } = req.params
-
-        const task = await Task.findOne({ _id: id, owner: req.user._id })
+        const task = await Task.findOne({ _id: req.params.id, owner: req.user.id })
 
         if (!task) return res.status(404).send()
 
@@ -57,8 +58,7 @@ router.patch('/:id', auth, async (req, res) => {
 // Delete
 router.delete('/:id', auth, async (req, res) => {
     try {
-        const { id } = req.params
-        const deletedTask = await Task.findOneAndDelete({ _id: id, author: req.user._id })
+        const deletedTask = await Task.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
         if (!deletedTask) return res.status(400).send({ error: "Unable to find the Task!" })
         res.send(deletedTask)
     } catch (e) {
