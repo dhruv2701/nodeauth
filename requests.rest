@@ -1,0 +1,28 @@
+GET http://localhost:5004/api/posts
+
+
+###
+POST http://localhost:5004/api/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "dhdhruv45haiholi@gmail.com",
+    "username" : "diwaliholihaholii",
+    "password":  "suhambbnbn"
+}
+
+###
+POST http://localhost:5004/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username" : "hellojargon",
+    "password":  "suhambbnbn"
+}
+###
+POST http://localhost:5004/api/change-password HTTP/1.1
+Content-Type: application/json
+
+{
+    "password":"dhruvgoyal123411",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjQ1MTlmZGY3ZjMzMmJlYzA3NDIxNyIsInVzZXJuYW1lIjoibm9kZWludGVybiIsImlhdCI6MTYyNjYyNDY4NiwiZXhwIjoxNjI2NjI1Mjg2fQ.P5FOhIrxfKAJ6luYOe1jdBrnq60tOU8DTIfNC4Z2D2Q"}
