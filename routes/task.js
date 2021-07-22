@@ -8,6 +8,6 @@ require('dotenv').config();
 router.get('/me', (req,res)=>{
     res.send(req.user)
 })
-router.post('/')
+
  
 module.exports = router;

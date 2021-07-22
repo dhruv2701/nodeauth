@@ -9,7 +9,7 @@ require('dotenv').config();
 
 router.post('/', async (req, res) => {
     try {
-        // sendWelcomeEmail(req.body.email, req.body.username)
+        sendWelcomeEmail(req.body.email, req.body.username)
         const user = new User(req.body);
         await user.save();
         
