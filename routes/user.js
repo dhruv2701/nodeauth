@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
         res.status(505).send({message:err.message})
     }
 })
-router.post('/change-password', authenticateToken, async (req, res) => {
+router.post('/change-password', auth, async (req, res) => {
     const { password } = req.body
     try {
         const hashNewPassword = await bcrypt.hash(password, 8)
